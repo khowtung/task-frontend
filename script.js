@@ -5,7 +5,7 @@ const taskFormElement = document.querySelector('#taskForm');
 const taskInputElement = document.querySelector('#taskInput');
 const priorityInputElement = document.querySelector('#priorityInput');
 
-const API_URL = 'https://task-backend-ja4q.onrender.com/tasks';
+const API_URL = 'https://task-backend-ja4q.onrender.com';
 
 const fetchTasks = async () => {
   try {
@@ -63,7 +63,7 @@ const renderTasks = () => {
 };
 
 const addTask = async (title, priority) => {
-  await fetch('https://task-backend-ja4q.onrender.com/tasks', {
+  await fetch('https://task-backend-ja4q.onrender.com', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

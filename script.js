@@ -5,7 +5,7 @@ const taskFormElement = document.querySelector('#taskForm');
 const taskInputElement = document.querySelector('#taskInput');
 const priorityInputElement = document.querySelector('#priorityInput');
 
-const API_URL = 'https://task-backend-ja4q.onrender.com';
+const API_URL = 'https://task-backend-ja4q.onrender.com/tasks';
 
 const fetchTasks = async () => {
   try {
@@ -13,6 +13,10 @@ const fetchTasks = async () => {
       "<h3 style='text-align: center;'>กำลังโหลดข้อมูล...</h3>";
 
     const response = await fetch(API_URL);
+
+    if (!response.ok) {
+      throw new Error(`โหลดงานไม่สำเร็จ (${response.status})`);
+    }
 
     const data = await response.json();
 
@@ -63,7 +67,7 @@ const renderTasks = () => {
 };
 
 const addTask = async (title, priority) => {
-  await fetch('https://task-backend-ja4q.onrender.com', {
+  const response = await fetch(API_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -74,14 +78,22 @@ const addTask = async (title, priority) => {
     })
   });
 
+  if (!response.ok) {
+    throw new Error(`เพิ่มงานไม่สำเร็จ (${response.status})`);
+  }
+
   await fetchTasks();
 };
 
 const toggleTaskStatus = async id => {
   try {
-    await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
       method: 'PUT'
     });
+
+    if (!response.ok) {
+      throw new Error(`เปลี่ยนสถานะไม่สำเร็จ (${response.status})`);
+    }
 
     await fetchTasks();
   } catch (error) {
@@ -91,9 +103,13 @@ const toggleTaskStatus = async id => {
 
 const deleteTask = async id => {
   try {
-    await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
       method: 'DELETE'
     });
+
+    if (!response.ok) {
+      throw new Error(`ลบงานไม่สำเร็จ (${response.status})`);
+    }
 
     await fetchTasks();
   } catch (error) {

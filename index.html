@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 12 - Full-Stack Integration</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>รายการงาน</h1>
+
+    <form id="taskForm" class="task-form">
+      <input
+        id="taskInput"
+        type="text"
+        placeholder="เพิ่มงานใหม่..."
+        required
+      >
+
+      <select id="priorityInput">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+
+      <button type="submit">เพิ่มงาน</button>
+    </form>
+
+    <section id="taskList" class="task-list"></section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
